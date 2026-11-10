@@ -4,33 +4,23 @@ Resumable acquisition of the University of Malta's published Cloudisle point-clo
 
 ## Install / update
 
-From a checkout, run the same command for installation and updates:
+Run the same command to install or update, with no checkout or GitHub login:
 
 **Linux / macOS**
 ```sh
-./install.sh
+curl -LsSf https://raw.githubusercontent.com/onetrickpony1/cloudisle-dl/main/install.sh | sh
 ```
+
 **Windows PowerShell**
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\install.ps1
+powershell -ExecutionPolicy ByPass -c "irm https://raw.githubusercontent.com/onetrickpony1/cloudisle-dl/main/install.ps1 | iex"
 ```
 
-The installer provisions uv, Python 3.12 and the Python dependencies in an isolated tool environment. It fetches the latest `main` from this private repository via GitHub CLI; no git client is needed. If needed, it installs an official checksummed GitHub CLI binary in your user profile and asks you to authenticate. Your account must have access to the private repository. GitHub authentication cannot be completed on your behalf. No administrator privileges, Homebrew or winget are required. Linux/macOS need curl or wget to bootstrap uv; Windows uses built-in PowerShell HTTPS support.
+These follow the same installer structure as journal-dl: install uv if missing, provision Python 3.12, install the latest source into an isolated tool environment, and add the executable to PATH. No administrator rights, GitHub CLI, git client or browser are required. Linux/macOS need curl or wget to bootstrap uv; Windows uses built-in PowerShell HTTPS support.
 
-Already have authenticated `gh`? Install/update without a checkout:
+Installation/update never starts, stops or migrates a downloader, and never removes downloaded data. A running worker keeps its loaded version; use `stop` then `resume` to load the update. Reopen your terminal if PATH was updated. Uninstall the software with `uv tool uninstall cloudisle-dl`; this does not delete the archive.
 
-```sh
-# Linux/macOS
- gh api repos/onetrickpony1/cloudisle-dl/contents/install.sh --jq .content | base64 -d | bash
-```
-```powershell
-# Windows PowerShell
-$script = gh api repos/onetrickpony1/cloudisle-dl/contents/install.ps1 --jq .content; & ([scriptblock]::Create([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String(($script -join "`n")))))
-```
-
-For local development, `./install.sh --local` or `.\install.ps1 -Local` installs the checkout without GitHub authentication. Alternatively: `python -m pip install .` in a virtual environment.
-
-Installation/update never starts, stops or migrates a downloader, and never removes downloaded data. A running worker continues using its loaded version; run `stop` then `resume` to load the update. Reopen your terminal if the installer updates PATH.
+For a checkout, run `sh install.sh` or execute `install.ps1`. Developers can override the package source with `CLOUDISLE_DL_SOURCE` (for example an absolute checkout path), and the managed Python version with `CLOUDISLE_DL_PYTHON`. Alternatively use `python -m pip install .` in a virtual environment.
 
 ## Commands
 

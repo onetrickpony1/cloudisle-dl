@@ -18,8 +18,12 @@ jobs:
       - run: cloudisle-dl --help
       - name: Test install/update script (Linux/macOS)
         if: runner.os != 'Windows'
-        run: bash install.sh --local
+        run: sh install.sh
+        env:
+          CLOUDISLE_DL_SOURCE: ${{ github.workspace }}
       - name: Test install/update script (Windows)
         if: runner.os == 'Windows'
         shell: powershell
-        run: .\install.ps1 -Local
+        run: Get-Content -Raw .\install.ps1 | Invoke-Expression
+        env:
+          CLOUDISLE_DL_SOURCE: ${{ github.workspace }}

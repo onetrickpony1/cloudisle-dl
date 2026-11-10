@@ -1,3 +1,2 @@
 include install.sh install.ps1
-recursive-include scripts *.py
 recursive-include tests *.py

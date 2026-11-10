@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cloudisle-dl"
+version = "0.1.0"
+description = "Resumable Cloudisle point-cloud acquisition with background service and status CLI"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["laspy>=2.6,<3", "lazrs>=0.7,<1", "numpy>=2,<3"]
+classifiers = ["Operating System :: POSIX :: Linux", "Programming Language :: Python :: 3"]
+
+[project.scripts]
+cloudisle-dl = "cloudisle_dl.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

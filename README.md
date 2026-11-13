@@ -1,19 +1,29 @@
 # cloudisle-dl
 
-Download the University of Malta’s Cloudisle point-cloud datasets on **Windows, macOS or Linux**. Runs in the background, resumes interrupted downloads and validates downloaded files.
+Download the University of Malta’s Cloudisle point-cloud datasets on Windows, macOS or Linux. Runs in the background, resumes interrupted downloads and validates downloaded files.
 
-## Install or update
+## Features
 
-**Linux / macOS**
+- **Background worker.** `start` and close the terminal. `status` shows progress, the current file and free space.
+- **Resumable.** `stop` and `resume` at any time. Partial files continue where the server supports it.
+- **Validated.** Files are decoded and hashed, and ZIP archives are CRC-checked. Small LAZ files are bundled
+  unchanged into packs.
+- **Conservative defaults:** 1 connection, 2 requests a second, 8 MiB a second and a 50 GiB free-space reserve.
+- **Everything in one place.** Data, partial files, logs and state stay inside the destination folder.
+- **A final report** listing per-source results and unresolved files.
 
-```sh
-curl -LsSf https://raw.githubusercontent.com/onetrickpony1/cloudisle-dl/main/install.sh | sh
-```
+## Install
 
-**Windows PowerShell**
+**Windows** (PowerShell):
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://raw.githubusercontent.com/onetrickpony1/cloudisle-dl/main/install.ps1 | iex"
+```
+
+**Linux and macOS** (Terminal):
+
+```sh
+curl -LsSf https://raw.githubusercontent.com/onetrickpony1/cloudisle-dl/main/install.sh | sh
 ```
 
 The installer sets up Python and dependencies automatically. No administrator rights, GitHub account or browser required. Reopen your terminal if the command is not found.
@@ -91,3 +101,7 @@ python -m unittest discover -s tests -v
 ```
 
 Tests use synthetic files and a local HTTP server. CI checks Linux, macOS and Windows.
+
+## License
+
+GNU General Public License v3.0 or later (GPL-3.0-or-later). See [LICENSE](LICENSE) and the [Legal Notice](LEGAL.md).

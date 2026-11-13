@@ -1,15 +1,17 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "cloudisle-dl"
 version = "0.1.1"
-description = "Resumable Cloudisle point-cloud acquisition with background service and status CLI"
+description = "Download the University of Malta's Cloudisle point-cloud datasets: resumable, background, validated"
 readme = "README.md"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE", "LEGAL.md"]
 requires-python = ">=3.11"
 dependencies = ["laspy>=2.6,<3", "lazrs>=0.7,<1", "numpy>=2,<3"]
-classifiers = ["Operating System :: POSIX :: Linux", "Programming Language :: Python :: 3"]
+classifiers = ["Operating System :: OS Independent", "Programming Language :: Python :: 3", "Environment :: Console"]
 
 [project.scripts]
 cloudisle-dl = "cloudisle_dl.cli:main"
